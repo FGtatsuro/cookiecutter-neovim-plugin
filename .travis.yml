@@ -1,0 +1,49 @@
+---
+branches:
+  only:
+  - master
+
+# https://docs.travis-ci.com/user/multi-os/
+matrix:
+  include:
+    - os: osx
+      language: generic
+      # Ref. https://github.com/Homebrew/brew/pull/597
+      # Ref. https://langui.sh/2015/07/24/osx-clang-include-lib-search-paths/
+      osx_image: xcode8
+      env:
+        - TARGET=localhost
+        - PYTHONPATH="/Library/Python/2.7/site-packages:$PYTHONPATH"
+      install:
+        - sudo pip install -U setuptools
+        - sudo pip install cookiecutter
+    - os: linux
+      dist: trusty
+      language: python
+      python: 2.7
+      services:
+        - docker
+      addons:
+        apt:
+          packages:
+          - python-pip
+      before_script:
+        - docker run -it -d --name ${TARGET} ${IMAGE_NAME} /bin/bash
+      after_script:
+        - docker rm -f container
+      env:
+        - TARGET=container
+        - IMAGE_NAME=fgtatsuro/infra-bridgehead:alpine-3.3
+
+sudo: required
+
+install:
+  - pip install cookiecutter
+
+script:
+  - cookiecutter --replay --config-file tests/cookiecutterrc .
+  - cd cookiecuttertest.nvim
+  - ls autoload/cookiecuttertest.vim
+  - ls doc/cookiecuttertest.txt
+  - ls plugin/cookiecuttertest.vim
+  - ls rplugin/python3/cookiecuttertest/cookiecuttertest.py

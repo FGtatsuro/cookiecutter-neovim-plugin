@@ -1,0 +1,7 @@
+{
+        "project_name": "Name of generated project",
+        "project_description": "Description of generated project",
+	"plugin_prefix": "{{ cookiecutter.project_name|replace('.nvim','')|replace('.vim','') }}",
+        "year": "2018",
+        "author": "Your Github username"
+}
