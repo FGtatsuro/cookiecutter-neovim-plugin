@@ -48,4 +48,5 @@ script:
   - ls plugin/cookiecuttertest.vim
   - ls rplugin/python3/cookiecuttertest/cookiecuttertest.py
   - ls tests/vimrc
+  - pip install -r requirements-dev.txt
   - make lint
