@@ -48,4 +48,3 @@ script:
   - ls plugin/cookiecuttertest.vim
   - ls rplugin/python3/cookiecuttertest/cookiecuttertest.py
   - ls tests/vimrc
-  - make lint
