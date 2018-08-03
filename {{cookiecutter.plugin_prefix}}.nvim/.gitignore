@@ -1,0 +1,3 @@
+__pycache__
+{{cookiecutter.plugin_prefix}}.log*
+.mypy_cache
